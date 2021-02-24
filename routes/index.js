@@ -6,4 +6,7 @@ router.get('/', (req, res) => {
     res.render('home')
 })
 
+router.use('/medicine', medicineRoute)
+
+
 module.exports = router
