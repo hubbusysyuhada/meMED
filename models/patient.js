@@ -15,12 +15,44 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Patient.init({
-    name: DataTypes.STRING,
-    age: DataTypes.INTEGER,
-    comorbid: DataTypes.STRING
+    name: {
+      type: DataTypes.STRING,
+      validate : {
+        notEmpty : {
+          args : true,
+          msg : "Please fill in the name box"
+        }
+      }
+    },
+    age: {
+      type: DataTypes.INTEGER,
+      validate : {
+        errors (value) {
+          let fatal = false
+          if (value === undefined || value === null || !value) {
+            fatal = "Please fill in the age box"
+          } else if (value <= 0) {
+            fatal = "Please enter a valid age"
+          }
+          if (fatal) {
+            throw new Error (fatal)
+          }
+        }        
+      }
+    },
+    comorbid: DataTypes.STRING,
+    gender : {
+      type: DataTypes.STRING,
+      validate : {
+        notEmpty : {
+          args : true,
+          msg : "You haven't choose the gender"
+        }
+      }
+    }
   }, {
     sequelize,
-    modelName: 'Patient',
+    modelName: 'Patient'
   });
   return Patient;
 };
