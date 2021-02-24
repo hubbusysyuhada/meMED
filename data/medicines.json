@@ -1,0 +1,22 @@
+[
+    {
+        "name" : "amlodiphine",
+        "stock" : 30
+    },
+    {
+        "name" : "panadol",
+        "stock" : 27
+    },
+    {
+        "name" : "cataflam",
+        "stock" : 15
+    },
+    {
+        "name" : "imodium",
+        "stock" : 8
+    },
+    {
+        "name" : "paracetamol",
+        "stock" : 45
+    }
+]
