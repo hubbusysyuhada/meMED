@@ -7,5 +7,6 @@ router.post('/add', MainController.storePatient)
 router.get('/delete/:id', MainController.deletePatient)
 router.get('/view/:id', MainController.viewPatient)
 router.post('/view/:id', MainController.storeMeds)
+router.post('/view/:PatientId/:MedicineId', MainController.giveMeds)
 
 module.exports = router
