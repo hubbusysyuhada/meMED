@@ -9,6 +9,15 @@
 <body>
     <%- include ('./partials/navbar')%>
     <h1><%= data.name%> Detail</h1>
+
+    <% if (insuf) { %>
+        <p>insufficient ammount of <%= insuf%> </p>
+    <% } else if (success) { %>
+        <p> <%= data.name%> has taken the <%= success.medname %> </p>
+    <% } %>
+
+
+
     <h3>Age :</h3>
     <p><%= data.age %></p>
     <h3>Comorbid :</h3>
@@ -46,9 +55,18 @@
     <br>
     <h3>Medicine Taken :</h3>
     <ul>
-        <% details.forEach(el => { %>
-            <li> <%= el.Medicine.name%>, <%= el.timesPerDay%> times/day, <%= el.doses%> ea</li>
-        <% }) %>
+        <table>
+            <% details.forEach(el => { %>
+                <tr>
+                    <td>
+                        <li> <%= el.Medicine.name%>, <%= el.timesPerDay%> times/day, <%= el.doses%> ea</li>
+                    </td>
+                    <td>
+                        <form action="/patients/view/<%= el.PatientId %>/<%= el.Medicine.id %>" method="POST"><button type="submit">Give Medicine</button></form>
+                    </td>
+                </tr>
+            <% }) %>
+        </table>
     </ul>
 </body>
 </html>

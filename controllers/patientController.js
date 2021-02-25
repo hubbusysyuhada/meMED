@@ -3,10 +3,30 @@ const capitalize = require('../helpers/capitalize_word');
 
 class MainController {
     static getPatients (req, res) {
+        let data;
         console.log(req.session);
         Patient.findAll()
-        .then(data => {
-            res.render('patients', {data})
+        .then(result => {
+            data = result
+            return PatientMedicine.findAll({include : Medicine})
+        })
+        .then(result => {
+            let quantity = {}
+            for (let i = 0; i < result.length; i++) {
+                let name = result[i].Medicine.name
+                if (!quantity[name]) {
+                    quantity[name] = result[i].doses
+                } else {
+                    quantity[name] += result[i].doses
+                }
+            }
+            let medname = []
+            let ammount = []
+            for (let key in quantity) {
+                medname.push(key);
+                ammount.push(quantity[key]);
+            }
+            res.render('patients', {data, ammount, medname})
         })
         .catch ((err) => {
             res.send(err)
@@ -58,6 +78,8 @@ class MainController {
     }
 
     static viewPatient (req, res) {
+        let insuf = req.query.insuf
+        let success = {medname : req.query.medname, dose : req.query.dose}
         let query = req.query.err
         let id = req.params.id
         let numberId = Number(id)
@@ -83,7 +105,7 @@ class MainController {
             if (query) {
                 query = query.split(',')
             }
-            res.render('patientDetails', {data, details, meds, numberId, query})
+            res.render('patientDetails', {data, details, meds, numberId, query, insuf, success})
         })
         .catch(err => {
             res.send(err)
@@ -108,6 +130,41 @@ class MainController {
                 errors.push(e.message)
             })
             res.redirect(`/patients/view/${id}?err=${errors}`)
+        })
+    }
+    
+    static giveMeds (req, res) {
+        let MedicineId = Number(req.params.MedicineId)
+        let PatientId = Number(req.params.PatientId)
+        let medName;
+        let dose;
+        PatientMedicine.findOne({
+            where : {
+                MedicineId : MedicineId,
+                PatientId : PatientId
+            },
+            include : Medicine
+        })
+        .then (data => {
+            medName = data.Medicine.name
+            dose = data.doses
+            if (data.Medicine.stock >= data.doses) {
+                let update = data.Medicine.stock - data.doses
+                let dataNew = {
+                    stock: update
+                }
+                Medicine.update(dataNew, {
+                    where: {id: MedicineId}
+                })
+            } else {
+                res.redirect(`/patients/view/${PatientId}?insuf=${medName}`)
+            }
+        })
+        .then ((data) => {
+            res.redirect(`/patients/view/${PatientId}?medname=${medName}&dose=${dose}`)
+        })
+        .catch(err => {
+            res.send(err)
         })
     }
 }
