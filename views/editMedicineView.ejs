@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include ('./partials/styles')%>
     <title>
         <%= title %>
     </title>
 </head>
-<nav>
+
+<body style="background-image: url(https://www.toptal.com/designers/subtlepatterns/patterns/double-bubble-outline.png);">
     <%- include ('./partials/navbar')%>
-</nav>
-<h1>
-    <%= title %>
-</h1>
-<body>
+    <h1>
+        <%= title %>
+    </h1>
     <form action="/medicine/edit/<%= data.id %>" method="POST">
 
         <label for="name">Name</label><br>
@@ -23,9 +23,9 @@
         <label for="stock">Stock</label><br>
         <input type="number" name="stock" id="" min="0" value="<%= undefined ? '' : data.stock %>"><br>
 
-        <button type="submit">Update</button>
+        <button class="btn btn-outline-success" type="submit">Update</button>
+        <button type="submit" formaction="/medicine" class="btn btn-outline-success">Cancel</button> <br>
     </form>
-    <a href="/medicine"><button>Cancel</button></a> <br>
     <%= errors %>
 </body>
 
