@@ -15,8 +15,29 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Medicine.init({
-    name: DataTypes.STRING,
-    stock: DataTypes.INTEGER
+    name: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty : {
+          args: true,
+          msg: `Medicine name can't be empty`
+        }
+      }
+    },
+    stock: {
+      type: DataTypes.INTEGER,
+      validate: {
+      quantity (input) {
+        let alert = false
+        if (input < 0) {
+          alert = "Please enter proper stock"
+        } 
+        if (alert) {
+          throw new Error (alert);
+        }
+      }
+    }
+  }
   }, {
     sequelize,
     modelName: 'Medicine',

@@ -11,6 +11,7 @@ app.use(session({
   cookie: { secure: false }
 }))
 app.use(express.urlencoded({extended:true}))
+
 app.set('view engine', 'ejs')
 
 app.use('/', router)
