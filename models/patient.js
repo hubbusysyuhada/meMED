@@ -13,6 +13,17 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Patient.belongsToMany(models.Medicine, {through:models.PatientMedicine})
     }
+
+    sayMyName () {
+      let result;
+      if (this.gender === "male") {
+        result = `Mr. ${this.name}`
+      } else if (this.gender === "female") {
+        result = `Ms. ${this.name}`
+      }
+      return result
+    }
+
   };
   Patient.init({
     name: {
@@ -41,18 +52,19 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     comorbid: DataTypes.STRING,
-    gender : {
-      type: DataTypes.STRING,
-      validate : {
-        notEmpty : {
-          args : true,
-          msg : "You haven't choose the gender"
+    gender : DataTypes.STRING
+  }, {
+    sequelize,
+    modelName: 'Patient',
+    hooks : {
+      afterFind (instance) {
+        if (instance.comorbid) {
+          instance.comorbid = (instance.comorbid).split(',')
+        } else {
+          instance.comorbid = []
         }
       }
     }
-  }, {
-    sequelize,
-    modelName: 'Patient'
   });
   return Patient;
 };
