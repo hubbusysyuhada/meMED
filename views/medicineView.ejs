@@ -5,22 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <scrip src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></scrip>
+    <%- include ('./partials/styles')%>
     <title>
         <%= title %>
     </title>
 </head>
-<nav>
-    <%- include('./partials/navbar.ejs')%>
-</nav>
-<h1>
-    <%= title %>
-</h1>
-    <!-- <p>STOCK IMMOUDIUM, KONIDIN TINGGAL SEDIKIT</p> -->
-    <% if (result) { %>
-        <p>You almost run out of <%= result%></p>
-    <% } %>
-<body>
-    <a href="/medicine/add"><button>Add Medicine</button></a>
+<body style="background-image: url(https://www.toptal.com/designers/subtlepatterns/patterns/double-bubble-outline.png);">
+    <%- include ('./partials/navbar')%>
+    <h1>
+        <%= title %>
+    </h1>
+        <% if (result) { %>
+            <p>You almost run out of <%= result%></p>
+        <% } %>
+    <a href="/medicine/add"><button class="btn btn-outline-success">Add Medicine</button></a>
     <table border="2">
         <tr>
             <th>Name</th>
@@ -39,7 +37,7 @@
                 <td>
                     <a href="/medicine/edit/<%= obj.id %>"><button>Edit</button></a>
                     <a href="/medicine/delete/<%= obj.id %>"
-                        onclick="return confirm('Delete this data?')"><button>Delete</button></a>
+                        onclick="return confirm('Delete this data?')"><button class="btn btn-outline-success">Delete</button></a>
                 </td>
             </tr>
             <% }) %>

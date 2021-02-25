@@ -5,7 +5,10 @@ const sessionController = require('../controllers/sessionController')
 const auth = require('../helpers/auth')
 
 router.get('/', (req, res) => {
-    res.render('home')
+    console.log("=============");
+    let session = req.session
+    console.log(session);
+    res.render('home', {session})
 })
 
 router.get('/register', sessionController.register)

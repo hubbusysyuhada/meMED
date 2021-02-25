@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include ('./partials/styles')%>
     <title><%= data.name%> Detail</title>
 </head>
-<body>
+<body style="background-image: url(https://www.toptal.com/designers/subtlepatterns/patterns/double-bubble-outline.png);">
     <%- include ('./partials/navbar')%>
     <h1><%= data.name%> Detail</h1>
 
@@ -43,7 +44,7 @@
         <input type="number" name="timesPerDay" placeholder="e.g. 3 times/day"><br>
         <label for="doses">Doses</label><br>
         <input type="number" name="doses" placeholder="e.g. 2 ea"><br>
-        <button type="submit">Add Now</button>
+        <button type="submit" class="btn btn-outline-success">Add Now</button>
     </form>
 
     <% if (query) { %>
@@ -62,7 +63,7 @@
                         <li> <%= el.Medicine.name%>, <%= el.timesPerDay%> times/day, <%= el.doses%> ea</li>
                     </td>
                     <td>
-                        <form action="/patients/view/<%= el.PatientId %>/<%= el.Medicine.id %>" method="POST"><button type="submit">Give Medicine</button></form>
+                        <form action="/patients/view/<%= el.PatientId %>/<%= el.Medicine.id %>" method="POST"><button class="btn btn-outline-success" type="submit">Give Medicine</button></form>
                     </td>
                 </tr>
             <% }) %>
