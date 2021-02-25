@@ -17,9 +17,10 @@ module.exports = {
       },
       MedicineId: {
         type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
         references : {
           model : "Medicines",
-          key : "id"
+          key : "id" ,
         }
       },
       timesPerDay: {
