@@ -5,8 +5,6 @@ const patientRoute = require('./patientRoute')
 router.get('/', (req, res) => {
     res.render('home')
 })
-router.get('/patient', (req, res) => {
-    res.send ("index")
-})
+router.use('/patients', patientRoute)
 
 module.exports = router

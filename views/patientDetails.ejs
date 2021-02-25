@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= data.name%> Detail</title>
+</head>
+<body>
+    <%- include ('./partials/navbar')%>
+    <h1><%= data.name%> Detail</h1>
+    <h3>Age :</h3>
+    <p><%= data.age %></p>
+    <h3>Comorbid :</h3>
+    <ul>
+        <% if (data.comorbid.length === 0) { %>
+            <p><%= data.name %> has no comorbid</p>
+        <% } %>
+        <% data.comorbid.forEach(el => { %>
+            <li> <%= el %> </li>
+        <% }) %>
+    </ul>
+    <br>
+
+    <h3>Add New Treatment :</h3>
+    <form action="/patients/view/<%= numberId %>" method="POST">
+        <label for="medicineId">Drugs Name</label><br>
+        <select name="medicineId" id="">
+            <% meds.forEach(el => { %>
+                <option value="<%= el.id%>"> <%= el.name%> </option>
+            <% }) %>
+        </select><br>
+        <label for="timesPerDay">Times Per Day</label><br>
+        <input type="number" name="timesPerDay" placeholder="e.g. 3 times/day"><br>
+        <label for="doses">Doses</label><br>
+        <input type="number" name="doses" placeholder="e.g. 2 ea"><br>
+        <button type="submit">Add Now</button>
+    </form>
+
+    <% if (query) { %>
+        <% query.forEach(el => { %>
+            <p><%= el %></p>
+        <% }) %>
+    <% } %>
+
+    <br>
+    <h3>Medicine Taken :</h3>
+    <ul>
+        <% details.forEach(el => { %>
+            <li> <%= el.Medicine.name%>, <%= el.timesPerDay%> times/day, <%= el.doses%> ea</li>
+        <% }) %>
+    </ul>
+</body>
+</html>

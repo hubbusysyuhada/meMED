@@ -13,14 +13,18 @@ module.exports = {
         references : {
           model : "Patients",
           key : "id"
-        }
+        },
+        onUpdate : "CASCADE",
+        onDelete : "CASCADE"
       },
       MedicineId: {
         type: Sequelize.INTEGER,
         references : {
           model : "Medicines",
           key : "id"
-        }
+        },
+        onUpdate : "CASCADE",
+        onDelete : "CASCADE"
       },
       timesPerDay: {
         type: Sequelize.INTEGER
