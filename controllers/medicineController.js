@@ -5,7 +5,15 @@ class MedicineController {
         Medicine.findAll ()
         
         .then((data) => {
-            res.render('medicineView',{data, title: 'Medicine List'})
+            let result = []
+            data.forEach(el => {
+                if (el.stock < 10) {
+                    result.push(el.name)
+                }
+            });
+            result = result.join(', ')
+            console.log(result);
+            res.render('medicineView',{data, title: 'Medicine List', result})
         })
         .catch ((err) => {
             res.send(err.message)

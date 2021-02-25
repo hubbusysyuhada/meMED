@@ -14,13 +14,17 @@
 <h1>
     <%= title %>
 </h1>
-
+    <!-- <p>STOCK IMMOUDIUM, KONIDIN TINGGAL SEDIKIT</p> -->
+    <% if (result) { %>
+        <p>You almost run out of <%= result%></p>
+    <% } %>
 <body>
     <a href="/medicine/add"><button>Add Medicine</button></a>
     <table border="2">
         <tr>
             <th>Name</th>
             <th>Stock </th>
+            <th>Action</th>
     
         </tr>
         <% data.map(obj=> { %>
