@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+    <%- include ('./partials/navbar')%>
+    <h1>Register</h1>
+    <form action="/register" method="POST">
+        <p>Name</p>
+        <input type="text" name="name">
+        <p>Username</p>
+        <input type="text" name="username">
+        <p>Password</p>
+        <input type="password" name="password">
+        <p>Email</p>
+        <input type="email" name="email">
+        <br>
+
+        <button type="submit">submit</button><button type="submit" formaction="/patients" formmethod="GET">Go Back</button>
+    </form>
+
+    <% if (query) { %>
+        <% query.forEach(e => { %>
+            <p> <%= e %> </p>
+
+        <% }) %>
+    <% } %>
+</body>
+</html>

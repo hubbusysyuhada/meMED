@@ -3,6 +3,7 @@ const capitalize = require('../helpers/capitalize_word');
 
 class MainController {
     static getPatients (req, res) {
+        console.log(req.session);
         Patient.findAll()
         .then(data => {
             res.render('patients', {data})
