@@ -5,15 +5,27 @@ class MedicineController {
         Medicine.findAll ()
         
         .then((data) => {
+            console.log(data); //
             let result = []
             data.forEach(el => {
                 if (el.stock < 10) {
                     result.push(el.name)
                 }
             });
+
+            let labels = []
+            data.forEach(e =>{
+                labels.push(e.name)
+            })
+
+            let quantity = []
+            data.forEach(e => {
+                quantity.push(e.stock)
+            })
+            console.log(labels);
             result = result.join(', ')
             console.log(result);
-            res.render('medicineView',{data, title: 'Medicine List', result})
+            res.render('medicineView',{data, title: 'Medicine List', result, labels})
         })
         .catch ((err) => {
             res.send(err.message)
