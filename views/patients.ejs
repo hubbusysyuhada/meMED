@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patients</title>
+</head>
+<body>
+    <%- include ('./partials/navbar')%>
+    <h1>Patients List</h1>
+    <a href="patients/add">Add Patient</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Comorbid</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.forEach(el => { %>
+                <tr>
+                    <td><%= el.id %></td>
+                    <td><%= el.sayMyName() %></td>
+                    <td><%= el.age %></td>
+                    <td><%= el.comorbid %></td>
+                    <form action="#">
+                        <td><button formaction="patients/view/<%= el.id %>">View</button> <button onclick="return confirm('Are you sure want to remove <%= el.name%> from patients?')" type="submit"formaction="patients/delete/<%= el.id %>">Delete</button> </td>
+                    </form>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

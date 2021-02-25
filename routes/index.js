@@ -5,6 +5,7 @@ const patientRoute = require('./patientRoute')
 router.get('/', (req, res) => {
     res.render('home')
 })
+router.use('/patients', patientRoute)
 
 router.use('/medicine', medicineRoute)
 

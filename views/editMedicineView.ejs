@@ -21,11 +21,12 @@
         <input type="text" name="name" id=""value="<%= undefined ? '' : data.name %>"><br>
 
         <label for="stock">Stock</label><br>
-        <input type="number" name="stock" id=""value="<%= undefined ? '' : data.stock %>"><br>
+        <input type="number" name="stock" id="" min="0" value="<%= undefined ? '' : data.stock %>"><br>
 
         <button type="submit">Update</button>
     </form>
-    <a href="/medicine"><button>Cancel</button></a>
+    <a href="/medicine"><button>Cancel</button></a> <br>
+    <%= errors %>
 </body>
 
 </html>

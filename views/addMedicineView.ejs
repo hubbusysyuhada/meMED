@@ -21,11 +21,13 @@
         <input type="text" name="name" id=""><br>
 
         <label for="stock">Stock</label><br>
-        <input type="number" name="stock" id=""><br>
+        <input type="number" name="stock" min="1" value="1" id=""><br>
 
         <button type="submit">Save</button>
     </form>
-    <a href="/medicine"><button>Cancel</button></a>
+    <a href="/medicine"><button>Cancel</button></a> <br>
+
+    <%= errors %>
 </body>
 
 </html>

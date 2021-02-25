@@ -15,7 +15,8 @@ class MedicineController {
     }
 
     static add(req, res) {
-        res.render ('addMedicineView', {title: 'Add Medicine'})
+        let errors = req.query.errors
+        res.render ('addMedicineView', {title: 'Add Medicine', errors})
     }
 
     static afterAdd (req, res) {
@@ -28,16 +29,21 @@ class MedicineController {
             res.redirect('/medicine')
         })
         .catch (err => {
-            res.send(err.message)
+            let errors = []
+            err.errors.forEach(error => {
+                errors.push(error.message)
+            })
+            res.redirect(`/medicine/add?errors=${errors}`)
         })
     }
 
     static edit(req, res) {
         //let medData
+        let errors = req.query.errors
         Medicine.findByPk(req.params.id)
 
         .then((data) => {
-            res.render ('editMedicineView', {data, title: 'Edit Medicine'})
+            res.render ('editMedicineView', {data, title: 'Edit Medicine', errors})
             
         })
         .catch((err) => {
@@ -46,6 +52,8 @@ class MedicineController {
     }
 
     static afterEdit (req, res) {
+        let id = req.params.id
+        
         let dataNew = {
             name:req.body.name,
             stock: req.body.stock
@@ -59,7 +67,11 @@ class MedicineController {
             res.redirect('/medicine')
         })
         .catch(err => {
-            res.send(err.message)
+            let errors = []
+            err.errors.forEach(error => {
+                errors.push(error.message)
+            })
+            res.redirect(`/medicine/edit/${id}?errors=${errors}`)
         })
     }
 
