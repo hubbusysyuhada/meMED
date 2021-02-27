@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include ('./partials/styles')%>
+    <title>Patients</title>
+</head>
+<body style="background-image: url(https://www.toptal.com/designers/subtlepatterns/patterns/double-bubble-outline.png);text-align: center;margin-left: auto;margin-right: auto;">
+    <%- include ('./partials/navbar')%>
+    <h1>Add New Patient</h1>
+    <form action="/patients/add" method="POST">
+        <p>Name</p>
+        <input type="text" name="name">
+        <p>Age</p>
+        <input type="number" name="age">
+        <p>Comorbid (if more than one, separate with comma)</p>
+        <input type="text" name="comorbid">
+        <p>Gender</p>
+        <select name="gender" id="">
+            <option value="male" disabled>Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">female</option>
+        </select>
+
+        <br>
+        <button class="btn btn-outline-success" type="submit">submit</button><button type="submit" formaction="/patients" formmethod="GET" class="btn btn-outline-success">Go Back</button>
+    </form>
+
+    <% if (query) { %>
+        <% query.forEach(e => { %>
+            <p> <%= e %> </p>
+
+        <% }) %>
+    <% } %>
+</body>
+</html>

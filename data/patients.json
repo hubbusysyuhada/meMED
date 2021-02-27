@@ -1,0 +1,26 @@
+[
+    {
+        "name" : "Bagus",
+        "age" : 22,
+        "comorbid" : "",
+        "gender" : "male"
+    },
+    {
+        "name" : "Budi",
+        "age" : 40,
+        "comorbid" : "diabetes",
+        "gender" : "male"
+    },
+    {
+        "name" : "Retno",
+        "age" : 54,
+        "comorbid" : "hipertensi",
+        "gender" : "female"
+    },
+    {
+        "name" : "Solihin",
+        "age" : 30,
+        "comorbid" : "",
+        "gender" : "male"
+    }
+]

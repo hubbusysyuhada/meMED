@@ -1,0 +1,38 @@
+[
+    {
+        "PatientId" : 1,
+        "MedicineId" : 3,
+        "timesPerDay" : 3,
+        "doses" : 1
+    },
+    {
+        "PatientId" : 1,
+        "MedicineId" : 2,
+        "timesPerDay" : 2,
+        "doses" : 2
+    },
+    {
+        "PatientId" : 2,
+        "MedicineId" : 4,
+        "timesPerDay" : 1,
+        "doses" : 2
+    },
+    {
+        "PatientId" : 2,
+        "MedicineId" : 1,
+        "timesPerDay" : 3,
+        "doses" : 1
+    },
+    {
+        "PatientId" : 3,
+        "MedicineId" : 3,
+        "timesPerDay" : 3,
+        "doses" : 1
+    },
+    {
+        "PatientId" : 4,
+        "MedicineId" : 1,
+        "timesPerDay" : 2,
+        "doses" : 2
+    }
+]

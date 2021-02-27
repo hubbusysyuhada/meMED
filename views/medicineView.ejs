@@ -1,0 +1,65 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <scrip src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></scrip>
+    <%- include ('./partials/styles')%>
+    <title>
+        <%= title %>
+    </title>
+</head>
+<body style="background-image: url(https://www.toptal.com/designers/subtlepatterns/patterns/double-bubble-outline.png);">
+    <%- include ('./partials/navbar')%>
+    <h1>
+        <%= title %>
+    </h1>
+        <% if (result) { %>
+            <p>You almost run out of <%= result%></p>
+        <% } %>
+    <a href="/medicine/add"><button class="btn btn-outline-success">Add Medicine</button></a>
+    <table border="2">
+        <tr>
+            <th>Name</th>
+            <th>Stock </th>
+            <th>Action</th>
+    
+        </tr>
+        <% data.map(obj=> { %>
+            <tr>
+                <td>
+                    <%= obj.name%>
+                </td>
+                <td>
+                    <%= obj.stock %>
+                </td>
+                <td>
+                    <a href="/medicine/edit/<%= obj.id %>"><button>Edit</button></a>
+                    <a href="/medicine/delete/<%= obj.id %>"
+                        onclick="return confirm('Delete this data?')"><button class="btn btn-outline-success">Delete</button></a>
+                </td>
+            </tr>
+            <% }) %>
+    </table>
+    <div class="container">
+    <canvas id="myChart"></canvas>
+    </div>
+        <script>
+           
+            let myChart = document.getElementById('myChart').getContext('2d');
+
+            let medChart = new Chart(myChart, {
+                type: 'bar',
+                data: {
+                    labels: ['panadol', 'novorapid', 'epipen'],
+                    datasets: [{
+                        label: 'Medicine',
+                        data: [21, 21, 32]
+                    }]
+                },
+                options: {}
+            })
+        </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include ('./partials/styles')%>
+    <title><%= data.name%> Detail</title>
+</head>
+<body style="background-image: url(https://www.toptal.com/designers/subtlepatterns/patterns/double-bubble-outline.png);">
+    <%- include ('./partials/navbar')%>
+    <h1><%= data.name%> Detail</h1>
+
+    <% if (insuf) { %>
+        <p>insufficient ammount of <%= insuf%> </p>
+    <% } else if (success) { %>
+        <p> <%= data.name%> has taken the <%= success.medname %> </p>
+    <% } %>
+
+
+
+    <h3>Age :</h3>
+    <p><%= data.age %></p>
+    <h3>Comorbid :</h3>
+    <ul>
+        <% if (data.comorbid.length === 0) { %>
+            <p><%= data.name %> has no comorbid</p>
+        <% } %>
+        <% data.comorbid.forEach(el => { %>
+            <li> <%= el %> </li>
+        <% }) %>
+    </ul>
+    <br>
+
+    <h3>Add New Treatment :</h3>
+    <form action="/patients/view/<%= numberId %>" method="POST">
+        <label for="medicineId">Drugs Name</label><br>
+        <select name="medicineId" id="">
+            <% meds.forEach(el => { %>
+                <option value="<%= el.id%>"> <%= el.name%> </option>
+            <% }) %>
+        </select><br>
+        <label for="timesPerDay">Times Per Day</label><br>
+        <input type="number" name="timesPerDay" placeholder="e.g. 3 times/day"><br>
+        <label for="doses">Doses</label><br>
+        <input type="number" name="doses" placeholder="e.g. 2 ea"><br>
+        <button type="submit" class="btn btn-outline-success">Add Now</button>
+    </form>
+
+    <% if (query) { %>
+        <% query.forEach(el => { %>
+            <p><%= el %></p>
+        <% }) %>
+    <% } %>
+
+    <br>
+    <h3>Medicine Taken :</h3>
+    <ul>
+        <table>
+            <% details.forEach(el => { %>
+                <tr>
+                    <td>
+                        <li> <%= el.Medicine.name%>, <%= el.timesPerDay%> times/day, <%= el.doses%> ea</li>
+                    </td>
+                    <td>
+                        <form action="/patients/view/<%= el.PatientId %>/<%= el.Medicine.id %>" method="POST"><button class="btn btn-outline-success" type="submit">Give Medicine</button></form>
+                    </td>
+                </tr>
+            <% }) %>
+        </table>
+    </ul>
+</body>
+</html>
